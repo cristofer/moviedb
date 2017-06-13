@@ -16,10 +16,13 @@
   $(document).ready(function() {
     <% @movies.each do |movie| %>
       <% 
+        read_only = false
+
         if user_signed_in?
           rating = movie.ratings.exists?(user: current_user) ? movie.ratings.find_by(user: current_user).stars : 3
         else
           rating = movie.ratings.any? ? (movie.ratings.sum(:stars) / movie.ratings.count) : 3
+          read_only = true
         end
       %>
       $(".my-rating-<%= movie.id.to_s %>").starRating({
@@ -28,6 +31,7 @@
         hoverColor: 'salmon',
         activeColor: 'cornflowerblue',
         initialRating: <%= rating %>,
+        readOnly: <%= read_only %>,
         strokeWidth: 0,
         useGradient: false,
         useFullStars: true,

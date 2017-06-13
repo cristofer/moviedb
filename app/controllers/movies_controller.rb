@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, :except => [:index, :show, :search]
+  before_action :authenticate_user!, :except => [:index, :show, :search, :search_by_category, :search_by_rate]
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate]
   before_action :check_edit_permissions, only: [:edit, :update, :destroy, :rate]
   before_action :check_logged, only: [:new, :create, :rate]
@@ -70,6 +70,26 @@ class MoviesController < ApplicationController
     text.gsub!(" ", "%") if text.match(" ")
 
     @movies = Movie.search text
+
+    respond_to do |format|
+      format.js { render "search.js.erb", locals: { movies: @movies } }
+    end
+  end
+
+  def search_by_category
+    category = params[:search]
+
+    @movies = Movie.search_by_category category
+
+    respond_to do |format|
+      format.js { render "search.js.erb", locals: { movies: @movies } }
+    end
+  end
+
+  def search_by_rate
+    rate = params[:search]
+
+    @movies = Movie.search_by_rate rate
 
     respond_to do |format|
       format.js { render "search.js.erb", locals: { movies: @movies } }

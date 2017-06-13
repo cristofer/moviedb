@@ -20,6 +20,12 @@ end
   end
 end
 
+(16..20).each do |i|
+  unless Movie.exists?(:title => "Movie #{i}")
+    Movie.create!(title: "Movie #{i}", text: "Text Movie #{i}", user: User.last)
+  end
+end
+
 ["Drama", "Sci-Fi", "Love", "Adventure", "Romance", "Family", "Musical", "Horror", "Thriller"].each do |name|
   unless Category.exists?(name: name)
     Category.create!(name: name)
@@ -30,6 +36,11 @@ unless Movie.first.categories.any?
   Category.limit(3).each do |category|
     Movie.first.categories << category
   end
+
+end
+
+unless Movie.last.categories.any?
+  Movie.last.categories << Category.last
 end
 
 Rating.create!(user: User.last, movie: Movie.first) unless Rating.exists?(user: User.last, movie: Movie.first)

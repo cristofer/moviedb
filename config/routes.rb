@@ -10,5 +10,13 @@ Rails.application.routes.draw do
     collection do
       post :search
     end
+
+    collection do
+      get :search_by_category
+    end
+
+    collection do
+      get :search_by_rate
+    end
   end
 end
