@@ -6,5 +6,9 @@ Rails.application.routes.draw do
     member do
       patch '/rate/:rate', to: 'movies#rate'
     end
+
+    collection do
+      post :search
+    end
   end
 end

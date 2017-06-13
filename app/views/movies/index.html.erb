@@ -9,6 +9,13 @@
 
 </header>
 
+<div id="search" class="form-group">
+  <%= form_tag(search_movies_path, remote: true) do %>
+    <%= text_field_tag :search, nil, { :class => "form-control"} %>
+    <%= submit_tag "search", { :class => "btn btn-default form-control"} %>
+  <% end %>
+</div>
+
 <div id="movies">
   <%= render @movies %>
 </div>

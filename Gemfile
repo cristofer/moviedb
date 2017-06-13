@@ -34,11 +34,12 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.6'
-  gem 'factory_girl_rails', '~> 4.8'
 end
 
 group :test do
   gem 'capybara', '~> 2.14'
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'selenium-webdriver', '3.4.0'
 end
 
 group :development do
@@ -56,3 +57,4 @@ gem 'devise', '~> 4.3'
 gem 'pundit', '~> 1.1'
 gem 'dotenv-rails'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
