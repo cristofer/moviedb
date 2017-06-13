@@ -13,7 +13,8 @@ class MoviesController < ApplicationController
       flash[:notice] = "Movie has been created."
       redirect_to @movie
     else
-      
+      flash.now[:alert] = "Movie has not been created."
+      render "new"
     end
   end
 
@@ -24,7 +25,7 @@ class MoviesController < ApplicationController
   private
     
     def movie_params
-      params.require(:movie).permit(:name, :description)
+      params.require(:movie).permit(:title, :text)
     end
 
     def set_movie
