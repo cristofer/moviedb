@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   before_action :check_logged, only: [:new, :create, :rate]
 
   def index
-    @movies = Movie.all
+    @movies = Movie.page(params[:page]).per(10)
   end
 
   def new

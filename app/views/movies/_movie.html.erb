@@ -1,0 +1,40 @@
+<h2><%= link_to movie.title, movie %></h2> 
+<p><%= movie.text %></p>
+
+<div class="my-rating-<%= movie.id.to_s %>"></div>
+
+<% if owner(movie)  %>
+  <%= link_to "Edit Movie", edit_movie_path(movie),
+        class: "edit" %>
+  <%= link_to "Delete Movie", movie_path(movie),
+      method: :delete,
+     data: { confirm: "Are you sure you want to delete this movie?"},
+      class: "delete" %>
+ <% end %>
+
+<script>
+  $(document).ready(function() {
+    <% @movies.each do |movie| %>
+      <% 
+        if user_signed_in?
+          rating = movie.ratings.exists?(user: current_user) ? movie.ratings.find_by(user: current_user).stars : 3
+        else
+          rating = movie.ratings.any? ? (movie.ratings.sum(:stars) / movie.ratings.count) : 3
+        end
+      %>
+      $(".my-rating-<%= movie.id.to_s %>").starRating({
+        totalStars: 5,
+        emptyColor: 'lightgray',
+        hoverColor: 'salmon',
+        activeColor: 'cornflowerblue',
+        initialRating: <%= rating %>,
+        strokeWidth: 0,
+        useGradient: false,
+        useFullStars: true,
+        callback: function(currentRating, $el){
+          $.ajax({url: "/movies/ " + <%= movie.id.to_s %> + "/rate/" + currentRating, type: "PATCH"});
+          }
+      })
+    <% end %>
+  });
+</script>

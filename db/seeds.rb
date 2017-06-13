@@ -14,12 +14,10 @@ unless User.exists?(:email => "test2@riskmethods.net")
   User.create!(email: "test2@riskmethods.net", password: "password")
 end
 
-unless Movie.exists?(:title => "Movie 1")
-  Movie.create!(title: "Movie 1", text: "Text Movie 1", user: User.first)
-end
-
-unless Movie.exists?(:title => "Movie 2")
-  Movie.create!(title: "Movie 2", text: "Text Movie 2", user: User.last)
+15.times.each do |i|
+  unless Movie.exists?(:title => "Movie #{i}")
+    Movie.create!(title: "Movie #{i}", text: "Text Movie #{i}", user: User.first)
+  end
 end
 
 ["Drama", "Sci-Fi", "Love", "Adventure", "Romance", "Family", "Musical", "Horror", "Thriller"].each do |name|
