@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :set_movie
+
   def index
     @movies = Movie.all
   end
@@ -23,6 +25,22 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
   end
 
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    
+    if @movie.update(movie_params)
+      flash[:notice] = "Movie has been updated."
+      redirect_to @movie
+    else
+      flash.now[:alert] = "Movie has not been updated."
+      render "edit"
+    end
+  end
+
   private
     
     def movie_params
@@ -30,6 +48,6 @@ class MoviesController < ApplicationController
     end
 
     def set_movie
-#@movie = Movie.find(params[:id])
+#      @movie = Movie.find(params[:id])
     end
 end

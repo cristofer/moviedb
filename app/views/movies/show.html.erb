@@ -1,3 +1,5 @@
 <% title(@movie.title, "Movies") %>
+
 <h1><%= @movie.title %></h1>
+<%= link_to "Edit Movie", edit_movie_path(@movie) %>
 <p><%= @movie.text %></p>

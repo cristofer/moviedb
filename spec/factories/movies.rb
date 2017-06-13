@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :movie do
-    title "Title"
-    text "Text"
+    title "Movie 1"
+    text "Text Movie 1"
   end
 end
