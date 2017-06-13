@@ -14,6 +14,8 @@
     <h2><%= link_to movie.title, movie %></h2> 
     <p><%= movie.text %></p>
 
+    <div class="my-rating-<%= movie.id.to_s %>"></div>
+
     <% if owner(movie)  %>
       <%= link_to "Edit Movie", edit_movie_path(movie),
             class: "edit" %>
@@ -25,3 +27,26 @@
   <% end %>
 
 </div>
+
+<script>
+  $(document).ready(function() {
+    <% @movies.each do |movie| %>
+      <% 
+        rating = movie.ratings.exists?(user: current_user) ? movie.ratings.find_by(user: current_user).stars : 3
+      %>
+      $(".my-rating-<%= movie.id.to_s %>").starRating({
+        totalStars: 5,
+        emptyColor: 'lightgray',
+        hoverColor: 'salmon',
+        activeColor: 'cornflowerblue',
+        initialRating: <%= rating %>,
+        strokeWidth: 0,
+        useGradient: false,
+        useFullStars: true,
+        callback: function(currentRating, $el){
+          $.ajax({url: "/movies/ " + <%= movie.id.to_s %> + "/rate/" + currentRating, type: "PATCH"});
+          }
+      })
+    <% end %>
+  });
+</script>

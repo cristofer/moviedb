@@ -1,8 +1,8 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :check_edit_permissions, only: [:edit, :update, :destroy]
-  before_action :check_logged, only: [:new, :create]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate]
+  before_action :check_edit_permissions, only: [:edit, :update, :destroy, :rate]
+  before_action :check_logged, only: [:new, :create, :rate]
 
   def index
     @movies = Movie.all
@@ -48,10 +48,29 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def rate
+    stars = params[:rate]
+
+    if !@movie.ratings.exists?(user: current_user)
+      if @movie.ratings.create!(user: current_user, stars: stars)
+        head :ok
+      end
+    else
+      if @movie.ratings.find_by(user: current_user).update!(stars: stars)
+        head :ok
+      end
+    end
+
+    head :ok
+  end
+
   private
-    
     def movie_params
       params.require(:movie).permit(:title, :text, category_ids: [])
+    end
+
+    def rate_params
+      params.permit(:id, :rate)
     end
 
     def set_movie
