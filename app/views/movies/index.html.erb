@@ -2,7 +2,9 @@
   <h1>Movies</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Movie", new_movie_path, class: "new" %></li>
+    <% if user_signed_in? %>
+      <li><%= link_to "New Movie", new_movie_path, class: "new" %></li>
+    <% end %>
   </ul>
 
 </header>

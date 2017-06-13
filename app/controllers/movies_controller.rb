@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!, :except => [:index, :show]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :check_permissions, only: [:edit, :update, :destroy]
+  before_action :check_edit_permissions, only: [:edit, :update, :destroy]
+  before_action :check_logged, only: [:new, :create]
 
   def index
     @movies = Movie.all
@@ -59,9 +61,20 @@ class MoviesController < ApplicationController
       redirect_to movies_path
     end
 
-    def check_permissions
+    def check_edit_permissions
       begin
-        if current_user != @movie.user
+        if current_user.blank? || current_user != @movie.user
+          raise "unauthorized"
+        end 
+      rescue
+          flash[:alert] = "You are not allowed to do that."
+          redirect_to root_path
+      end
+    end
+     
+    def check_logged
+      begin
+        if current_user.blank?
           raise "unauthorized"
         end 
       rescue
