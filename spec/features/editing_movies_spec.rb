@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "Users can edit existing movies" do
+  let(:user) { FactoryGirl.create(:user) }
+  let!(:movie) { FactoryGirl.create(:movie, user: user) }
+
   before do
-    FactoryGirl.create(:movie)
+    login_as(user)
 
     visit "/"
     click_link "Movie 1"

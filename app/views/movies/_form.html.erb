@@ -1,6 +1,7 @@
 <%= simple_form_for(movie) do |f| %>
   <%= f.input :title %>
   <%= f.input :text %>
+  <%= f.association :categories, as: :check_boxes %>
 
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>
