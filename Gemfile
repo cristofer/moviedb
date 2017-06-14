@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.4'
+
 gem 'rails', '4.2.7.1'
 gem 'pg', '~> 0.21.0'
 gem 'sass-rails', '~> 5.0'
@@ -35,3 +37,4 @@ gem 'dotenv-rails'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
 gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
 gem 'rails_12factor', group: :production
+gem "puma", group: :production
