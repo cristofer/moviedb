@@ -1,9 +1,8 @@
 # About MovieDB
 
-This mini "IMDB" platform was requested by the CTO of Riskmethods in order to see part of my RoR skills,
-     and decide if I continue with the next stage in order to get a job with them.
+MovieDB is just a small IMDd, I will be improving it just for fun.
 
-## Features Requested
+## Features
 
 * Movie: Title, Text, Ratings, Category
 * Movie should have all REST actions
@@ -22,4 +21,3 @@ This mini "IMDB" platform was requested by the CTO of Riskmethods in order to se
  * In the movie list the logged users are able to rate the movie without a page reload
  * Next to it should be the buttons for C(R)UD actions if it's the user's movie
  * Pagination for more than 10 items
-

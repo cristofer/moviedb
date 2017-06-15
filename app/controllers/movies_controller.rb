@@ -52,16 +52,14 @@ class MoviesController < ApplicationController
     stars = params[:rate]
 
     if !@movie.ratings.exists?(user: current_user)
-      if @movie.ratings.create!(user: current_user, stars: stars)
-        head :ok
-      end
+      @movie.ratings.create!(user: current_user, stars: stars)
     else
-      if @movie.ratings.find_by(user: current_user).update!(stars: stars)
-        head :ok
-      end
+      @movie.ratings.find_by(user: current_user).update!(stars: stars)
     end
 
-    head :ok
+    respond_to do |format|
+      format.js { render "stars.js.erb" }
+    end
   end
 
   def search
