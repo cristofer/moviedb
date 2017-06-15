@@ -1,0 +1,8 @@
+$("#categories > *").empty();
+$("#categories").html("<%= j categories %>")
+
+$("#stars > *").empty();
+$("#stars").html("<%= j stars %>")
+
+$("#movies > *").empty();
+$("#movies").html("<%= j render @movies %>")

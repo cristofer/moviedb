@@ -44,8 +44,13 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy
 
-    flash[:notice] = "Movie has been deleted."
-    redirect_to movies_path
+    flash.now[:notice] = "Movie has been deleted."
+
+    @movies = Movie.all
+
+    respond_to do |format|
+      format.js { render "destroy.js.erb", locals: { movies: @movies } }
+    end
   end
 
   def rate
