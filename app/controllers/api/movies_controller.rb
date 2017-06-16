@@ -11,14 +11,14 @@ class API::MoviesController < API::ApplicationController
   end
 
   def show
-    render json: { movie: @movie }
+    render json: @movie
   end
 
   def create
     @movie = Movie.new(movie_params)
 
     if @movie.save
-      render json: { movie: @movie }, status: 201
+      render json: @movie, status: 201
     else
       render json: {errors: @movie.errors.full_messages}, status: 422
     end

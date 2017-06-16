@@ -5,9 +5,12 @@
   <h1><%= @movie.title %></h1>
 
   <ul class="actions">
-    <% if owner(@movie)  %>
+    <% if policy(@movie).edit?  %>
       <li><%= link_to "Edit Movie", edit_movie_path(@movie),
             class: "edit" %></li>
+    <% end %>
+
+    <% if policy(@movie).destroy?  %>
       <li><%= link_to "Delete Movie", movie_path(@movie),
           method: :delete,
          data: { confirm: "Are you sure you want to delete this movie?"},

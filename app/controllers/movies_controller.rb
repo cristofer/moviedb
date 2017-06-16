@@ -1,8 +1,6 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show, :search, :search_by_category, :search_by_rate]
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate]
-  before_action :check_edit_permissions, only: [:edit, :update, :destroy, :rate]
-  before_action :check_logged, only: [:new, :create, :rate]
 
   def index
     @movies = Movie.list_all.page(params[:page]).per(10)
@@ -10,10 +8,13 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+    authorize @movie, :create?
   end
 
   def create
     @movie = Movie.new(movie_params)
+    authorize @movie, :create?
+
     @movie.user = current_user
 
     if @movie.save
@@ -29,9 +30,12 @@ class MoviesController < ApplicationController
   end
 
   def edit
+    authorize @movie, :update?
   end
 
   def update
+    authorize @movie, :update?
+
     if @movie.update(movie_params)
       flash[:notice] = "Movie has been updated."
       redirect_to @movie
@@ -42,6 +46,8 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    authorize @movie, :destroy?
+
     @movie.destroy
     
     @movies = Movie.list_all
@@ -55,6 +61,8 @@ class MoviesController < ApplicationController
   end
 
   def rate
+    authorize @movie, :rate?
+
     stars = params[:rate]
 
     if !@movie.ratings.exists?(user: current_user)
@@ -114,27 +122,5 @@ class MoviesController < ApplicationController
       rescue ActiveRecord::RecordNotFound
       flash[:alert] = "The movie you were looking for could not be found."
       redirect_to movies_path
-    end
-
-    def check_edit_permissions
-      begin
-        if current_user.blank? || current_user != @movie.user
-          raise "unauthorized"
-        end 
-      rescue
-          flash[:alert] = "You are not allowed to do that."
-          redirect_to root_path
-      end
-    end
-     
-    def check_logged
-      begin
-        if current_user.blank?
-          raise "unauthorized"
-        end 
-      rescue
-          flash[:alert] = "You are not allowed to do that."
-          redirect_to root_path
-      end
     end
 end

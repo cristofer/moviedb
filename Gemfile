@@ -40,3 +40,4 @@ gem 'rails_12factor', group: :production
 gem "puma", group: :production
 gem 'gritter', '~> 1.2'
 gem 'active_model_serializers', '~> 0.10.6'
+gem 'pundit', '~> 1.1'
