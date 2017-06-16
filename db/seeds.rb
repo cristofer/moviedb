@@ -8,10 +8,16 @@
 
 unless User.exists?(:email => "test1@riskmethods.net")
   User.create!(email: "test1@riskmethods.net", password: "password")
+  User.last.generate_api_key
 end
 
 unless User.exists?(:email => "test2@riskmethods.net")
   User.create!(email: "test2@riskmethods.net", password: "password")
+  User.last.generate_api_key
+end
+
+User.all.each do |user|
+  user.generate_api_key if user.api_key.nil?
 end
 
 15.times.each do |i|

@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :ratings, dependent: :delete_all
   has_many :movies, dependent: :destroy
+  after_create :generate_api_key
+
+  def generate_api_key
+    self.update_column(:api_key, SecureRandom.hex(16))
+  end
 end

@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root "movies#index"
 
+  namespace :api do
+    resources :movies
+  end
+
   resources :movies do
     member do
       patch '/rate/:rate', to: 'movies#rate'
