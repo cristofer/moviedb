@@ -1,3 +1,3 @@
 <% flash.each do |key, message| %>
-  <%= js add_gritter(message, :title => key.titleize, sticky: false, time: 3000, :image => key) %>
+  <%= js add_gritter(message, :title => key.titleize, sticky: false, time: 3000) %>
 <% end %>
