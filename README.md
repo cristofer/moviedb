@@ -21,3 +21,11 @@ MovieDB is just a small IMDd, I will be improving it just for fun.
  * In the movie list the logged users are able to rate the movie without a page reload
  * Next to it should be the buttons for C(R)UD actions if it's the user's movie
  * Pagination for more than 10 items
+
+## API
+
+There is a very simple API that display an specific Movie, and also allows to create a movie.
+
+The API Key is nex to the "Signed in" text when you are logged in.
+
+You can update the values into movie_api/movies.rb  in order to make a simple request
