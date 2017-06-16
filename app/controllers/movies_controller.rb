@@ -27,6 +27,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    authorize @movie, :show?
   end
 
   def edit
@@ -83,6 +84,8 @@ class MoviesController < ApplicationController
 
     @movies = Movie.search text
 
+    authorize @movies, :search?
+
     respond_to do |format|
       format.js { render "search.js.erb", locals: { movies: @movies } }
     end
@@ -93,6 +96,8 @@ class MoviesController < ApplicationController
 
     @movies = Movie.search_by_category category
 
+    authorize @movies, :search?
+
     respond_to do |format|
       format.js { render "search.js.erb", locals: { movies: @movies } }
     end
@@ -102,6 +107,8 @@ class MoviesController < ApplicationController
     rate = params[:search]
 
     @movies = Movie.search_by_rate rate
+
+    authorize @movies, :search?
 
     respond_to do |format|
       format.js { render "search.js.erb", locals: { movies: @movies } }

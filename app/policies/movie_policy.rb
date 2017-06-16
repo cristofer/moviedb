@@ -20,4 +20,8 @@ class MoviePolicy < ApplicationPolicy
   def rate?
     user
   end
+
+  def search?
+    true
+  end
 end
