@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   before_action :check_logged, only: [:new, :create, :rate]
 
   def index
-    @movies = Movie.page(params[:page]).per(10)
+    @movies = Movie.list_all.page(params[:page]).per(10)
   end
 
   def new
@@ -43,13 +43,14 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
+    
+    @movies = Movie.list_all
 
     flash.now[:notice] = "Movie has been deleted."
 
-    @movies = Movie.all
-
     respond_to do |format|
-      format.js { render "destroy.js.erb", locals: { movies: @movies } }
+      format.html { redirect_to root_path }
+      format.js
     end
   end
 

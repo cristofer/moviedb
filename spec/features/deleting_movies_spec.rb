@@ -7,15 +7,23 @@ RSpec.feature "Users can delete movies" do
     login_as(user)
   end
 
-  scenario "successfully" do
+  scenario "inside the movie" do
     movie = FactoryGirl.create(:movie, user: user)
 
     visit "/"
     click_link "Movie 1"
     click_link "Delete Movie"
 
-    expect(page).to have_content "Movie has been deleted."
-    expect(page.current_url).to eq movies_url
     expect(page).to have_no_content "Movie 1"
+  end
+
+  scenario "in index", js: true do
+    movie = FactoryGirl.create(:movie, title: 'Movie 2', user: user)
+
+    visit "/"
+    click_link "Delete Movie"
+    page.driver.browser.switch_to.alert.accept
+
+    expect(page).to have_no_content "Movie 2"
   end
 end

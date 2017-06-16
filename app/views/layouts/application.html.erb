@@ -69,9 +69,9 @@
   </nav>
 
   <div class="container">
-    <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key%>"><%= message %></div>
-    <% end %>
+    <div id="flash">
+      <%= render partial: "shared/notice_banner" %>
+    </div>
 
     <%= yield %>
 
