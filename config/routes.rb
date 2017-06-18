@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   root "movies#index"
 
   namespace :api do
+    namespace :v2 do
+      mount API::V2::Movies, at: "/movies/"
+    end
+
     resources :movies
   end
 

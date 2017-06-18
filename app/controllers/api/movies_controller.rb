@@ -7,7 +7,7 @@ class API::MoviesController < API::ApplicationController
   def index
     @movies = Movie.list_all
 
-    render json: { movies: @movies }
+    render json: @movies
   end
 
   def show

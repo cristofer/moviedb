@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Movies API" do
   let(:user) { FactoryGirl.create(:user) }
-  let(:movie) { FactoryGirl.create(:movie, user: user) }
+  let!(:movie) { FactoryGirl.create(:movie, user: user) }
 
   before do
     user.generate_api_key
@@ -23,6 +23,16 @@ RSpec.describe "Movies API" do
       expect(response.body).to eq json
     end
 
+    it "retrieves all the movies" do
+      get api_movies_path(format: :json),
+        {}, headers
+
+      expect(response.status).to eq 200
+
+      json = "[" + MovieSerializer.new(movie).to_json + "]"
+      expect(response.body).to eq json
+    end
+
     it "can create a movie" do
       params = {
         format: "json",
@@ -32,7 +42,7 @@ RSpec.describe "Movies API" do
         }
       }
 
-      post api_movies_path(movie, params), {}, headers
+      post api_movies_path(params), {}, headers
 
       expect(response.status).to eq 201
       json = MovieSerializer.new(Movie.last).to_json
@@ -40,7 +50,6 @@ RSpec.describe "Movies API" do
     end
 
     it "cannot create a movie with invalid data" do
-
       params = {
         format: "json",
         movie: {
@@ -49,7 +58,7 @@ RSpec.describe "Movies API" do
         }
       }
 
-      post api_movies_path(movie, params), {}, headers
+      post api_movies_path(params), {}, headers
 
       expect(response.status).to eq 422
       json = {
@@ -59,7 +68,38 @@ RSpec.describe "Movies API" do
         ]
       }
       expect(JSON.parse(response.body)).to eq json
-      
+    end
+
+    it "can update a movie" do
+      params = {
+        format: "json",
+        movie: {
+          title: "Movie - API - Updated",
+          text: "Description - API - Updated"
+        }
+      }
+
+      patch api_movie_path(movie, params), {}, headers
+
+      expect(response.status).to eq 200
+      json = {message: "The movie was updated"}.to_json
+      expect(response.body).to eq json
+    end
+
+    it "cannot update a movie with invalid parameters" do
+      params = {
+        format: "json",
+        movie: {
+          title: "",
+          text: ""
+        }
+      }
+
+      patch api_movie_path(movie, params), {}, headers
+
+      expect(response.status).to eq 400
+      json = {error: "The movie was not updated"}.to_json
+      expect(response.body).to eq json
     end
   end
 
