@@ -4,10 +4,11 @@ MovieDB is just a small IMDd, I will be improving it just for fun.
 
 ## Features
 
-* Movie: Title, Text, Ratings, Category
-* Movie should have all REST actions
+* Movie: Title, Text, Ratings, Category, Comments
+* Movie has all REST actions
 * C(R)UD of own movies only for logged-in users
 * Rating (5 star system) of movies only for logged-in users
+* Create Comments for movies only for logged-in users
 * Home page = listing of all movies including full text search and facets of categories and ratings:
  * Example for categories:
    * Action (5)
