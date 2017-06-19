@@ -28,6 +28,7 @@ class MoviesController < ApplicationController
 
   def show
     authorize @movie, :show?
+    @comment = @movie.comments.build
   end
 
   def edit

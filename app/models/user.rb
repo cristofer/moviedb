@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   def generate_api_key
     self.update_column(:api_key, SecureRandom.hex(16))
   end
+
+  def to_s
+    email
+  end
 end

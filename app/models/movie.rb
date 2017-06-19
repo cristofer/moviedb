@@ -4,6 +4,7 @@ class Movie < ActiveRecord::Base
   has_and_belongs_to_many :categories, uniq: true
   belongs_to :user
   has_many :ratings, dependent: :delete_all
+  has_many :comments, dependent: :destroy
 
   scope :search, -> (text) { where("title ILIKE ? OR text ILIKE ?", "%#{text}%", "%#{text}%").order(:title) }
 

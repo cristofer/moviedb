@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616114952) do
+ActiveRecord::Schema.define(version: 20170619122507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20170616114952) do
 
   add_index "categories_movies", ["category_id", "movie_id"], name: "index_categories_movies_on_category_id_and_movie_id", using: :btree
   add_index "categories_movies", ["movie_id", "category_id"], name: "index_categories_movies_on_movie_id_and_category_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "movie_id"
+    t.integer  "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
+  add_index "comments", ["movie_id"], name: "index_comments_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -71,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170616114952) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "movies"
+  add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "movies", "users"
   add_foreign_key "ratings", "movies"
   add_foreign_key "ratings", "users"

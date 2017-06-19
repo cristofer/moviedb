@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     collection do
       get :search_by_rate
     end
+
+    resources :comments, only: [:create]
   end
 end

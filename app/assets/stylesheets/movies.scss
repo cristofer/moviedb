@@ -11,3 +11,7 @@
 #movies ul.actions {
   @extend ul.actions;
 }
+
+blockquote.comment p {
+  font-size: 14px;
+}

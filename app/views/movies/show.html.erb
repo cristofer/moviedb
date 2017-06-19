@@ -31,3 +31,17 @@
   </ul>
   </p>
 <% end %>
+
+<header>
+  <h3>Comments</h3>
+</header>
+
+<div id="comments">
+  <% if @movie.comments.persisted.any? %>
+    <%= render @movie.comments.persisted %>
+  <% else %>
+    <p>There are no comments for this ticket.</p>
+  <% end %>
+</div>
+
+<%= render "comments/form", movie: @movie, comment: @comment %>
