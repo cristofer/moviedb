@@ -13,11 +13,17 @@ RSpec.feature "Users can only see the appropiate links" do
       expect(page).not_to have_link "Edit Movie"
     end
 
-    scenario "cannot see the New Movie link (movie)" do
+    scenario "cannot see the Delete/Edit Movie link (movie)" do
       visit movie_path(movie)
 
       expect(page).not_to have_link "Delete Movie"
       expect(page).not_to have_link "Edit Movie"
+    end
+
+    scenario "cannot see the Create Comment button" do
+      visit movie_path(movie)
+
+      expect(page).not_to have_button "Create Comment"
     end
   end
 

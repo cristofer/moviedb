@@ -44,4 +44,6 @@
   <% end %>
 </div>
 
-<%= render "comments/form", movie: @movie, comment: @comment %>
+<% if policy(@comment).create? %>
+  <%= render "comments/form", movie: @movie, comment: @comment %>
+<% end %>
