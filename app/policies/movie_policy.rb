@@ -24,4 +24,8 @@ class MoviePolicy < ApplicationPolicy
   def search?
     true
   end
+
+  def rate_by_amount?
+    true
+  end
 end

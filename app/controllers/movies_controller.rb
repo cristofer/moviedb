@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show, :search, :search_by_category, :search_by_rate]
-  before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate, :rate_by_amount]
+
+  helper StatisticsHelper
 
   def index
     @movies = Movie.list_all.page(params[:page]).per(10)
@@ -76,6 +78,14 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.js { render "stars.js.erb", locals: {id: @movie.id} }
     end
+  end
+
+  def rate_by_amount
+    authorize @movie, :rate_by_amount?
+    
+    result = @movie.ratings.group(:stars).count
+
+    render json: [{name: 'Rates', data: result}] 
   end
 
   def search

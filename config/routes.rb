@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       patch '/rate/:rate', to: 'movies#rate'
     end
 
+    member do
+      get '/rate_by_amount/:id', to: 'movies#rate_by_amount', as: 'rate_by_amount'
+    end
+
     collection do
       post :search
     end

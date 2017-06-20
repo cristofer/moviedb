@@ -40,6 +40,10 @@
     </p>
   <% end %>
 
+  <% if @movie.ratings.any? %>
+    <%= rates_by_amount(@movie) %>
+  <% end %>
+
   <header>
     <h3>Comments</h3>
   </header>
