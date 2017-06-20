@@ -74,7 +74,7 @@ class MoviesController < ApplicationController
     end
 
     respond_to do |format|
-      format.js { render "stars.js.erb" }
+      format.js { render "stars.js.erb", locals: {id: @movie.id} }
     end
   end
 

@@ -21,4 +21,10 @@ module MoviesHelper
       value.html_safe
     end
   end
+
+  def movie_votes(movie)
+    mov = Movie.find(movie)
+    votes = mov.ratings.any? ? mov.ratings.count : 0 
+    pluralize(votes, 'vote').html_safe
+  end
 end

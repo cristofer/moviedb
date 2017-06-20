@@ -1,2 +1,5 @@
 $("#stars > *").empty();
 $("#stars").html("<%= j stars %>")
+
+$("#movie-votes-<%= id %>").empty();
+$("#movie-votes-<%= id %>").html("(<%= movie_votes(id) %>)");

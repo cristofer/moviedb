@@ -15,3 +15,14 @@
 blockquote.comment p {
   font-size: 14px;
 }
+
+.rating-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rating-inline.amount {
+  @extend .rating-inline;
+  margin-left: 10px;
+  font-size: 1.5em;
+}

@@ -3,7 +3,10 @@
 
 <%= image_tag movie.picture.small.url, class: "img-thumbnail" if movie.picture.present? %>
 
-<div class="my-rating-<%= movie.id.to_s %>"></div>
+<div>
+    <div class="my-rating-<%= movie.id.to_s %> rating-inline"></div>
+    <div class="rating-inline amount" id="movie-votes-<%= movie.id.to_s %>">(<%= movie_votes(movie.id) %>)</div>
+</div>
 
 <% if policy(movie).update?  %>
   <%= link_to "Edit Movie", edit_movie_path(movie),
@@ -43,7 +46,9 @@
         useGradient: false,
         useFullStars: true,
         callback: function(currentRating, $el){
-          $.ajax({url: "/movies/ " + <%= movie.id.to_s %> + "/rate/" + currentRating, type: "PATCH"});
+          $.ajax({
+            url: "/movies/ " + <%= movie.id.to_s %> + "/rate/" + currentRating, type: "PATCH",
+            });
           }
       })
     <% end %>
