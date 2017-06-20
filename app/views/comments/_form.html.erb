@@ -2,7 +2,7 @@
   <h3>New Comment</h3>
 </header>
 
-<%= simple_form_for [movie, comment] do |f| %>
+<%= simple_form_for [movie, comment], remote: true do |f| %>
   <%= f.input :text, label: "Comment" %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

@@ -7,8 +7,11 @@ class CommentsController < ApplicationController
     authorize @comment, :create?
 
     if @comment.save
-      flash[:notice] = "Comment has been created."
-      redirect_to @movie
+      flash.now[:notice] = "Comment has been created."
+
+      respond_to do |format|
+        format.js { render "comments/comment.js.erb", locals: { comments: @movie.comments } }
+      end
     else
       flash.now[:alert] = "Comment has not been created."
       render "movies/show"
