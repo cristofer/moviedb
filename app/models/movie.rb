@@ -13,4 +13,6 @@ class Movie < ActiveRecord::Base
   scope :search_by_rate, -> (rate) { joins(:ratings).where( :ratings => { :stars => rate } ).order(:title) }
 
   scope :list_all, -> { order(:title)}
+
+  mount_uploader :picture, PictureUploader
 end

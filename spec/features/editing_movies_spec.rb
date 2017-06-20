@@ -29,4 +29,23 @@ RSpec.feature "Users can edit existing movies" do
     expect(page).to have_content "Title can't be blank"
     expect(page).to have_content "Text can't be blank"
   end
+
+  scenario "with a picture" do
+    fill_in "Title", with: "Movie 1"
+    fill_in "Text", with: "Description 1"
+    attach_file "Picture", "spec/fixtures/the_godfather.jpg"
+
+    click_button "Update Movie"
+
+    expect(page).to have_content "Movie 1"
+
+    expect(page.find('#movie .picture .img-thumbnail')['src']).to have_content 'the_godfather.jpg'
+
+    visit edit_movie_path(movie)
+
+    attach_file "Picture", "spec/fixtures/the_godfather_2.jpg"
+
+    click_button "Update Movie"
+    expect(page.find('#movie .picture .img-thumbnail')['src']).to have_content 'the_godfather_2.jpg'
+  end
 end

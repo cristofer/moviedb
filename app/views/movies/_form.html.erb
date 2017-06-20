@@ -1,6 +1,16 @@
 <%= simple_form_for(movie) do |f| %>
   <%= f.input :title %>
   <%= f.input :text %>
+
+  <% if f.object.picture.present? %>
+    <div class="picture">
+      <h4>Current Picture</h4>
+      <%= image_tag @movie.picture.medium.url, class: "img-thumbnail" %>
+    </div>
+  <% end %>
+
+  <%= f.input :picture, as: :file, label: "Picture" %>
+  <%= f.input :picture_cache, as: :hidden %>
   <%= f.association :categories, as: :check_boxes %>
 
   <%= f.button :submit, class: "btn-primary" %>

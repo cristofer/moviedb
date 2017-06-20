@@ -118,7 +118,7 @@ class MoviesController < ApplicationController
 
   private
     def movie_params
-      params.require(:movie).permit(:title, :text, category_ids: [])
+      params.require(:movie).permit(:title, :text, :picture, :picture_cache, category_ids: [])
     end
 
     def rate_params
