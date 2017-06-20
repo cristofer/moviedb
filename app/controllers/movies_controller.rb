@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, :except => [:index, :show, :search, :search_by_category, :search_by_rate]
+  before_action :authenticate_user!, :except => [:index, :show, :search, :search_by_category, :search_by_rate, :rate_by_amount]
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :rate, :rate_by_amount]
 
   helper StatisticsHelper

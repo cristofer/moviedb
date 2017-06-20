@@ -27,6 +27,7 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   gem 'spring'
+  gem "rubycritic", require: false
 end
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'

@@ -8,19 +8,14 @@
     <div class="rating-inline amount" id="movie-votes-<%= movie.id.to_s %>">(<%= movie_votes(movie.id) %>)</div>
 </div>
 
-<% if policy(movie).update?  %>
-  <%= link_to "Edit Movie", edit_movie_path(movie),
-        class: "edit" %>
-<% end %>
+<%= link_to "Edit Movie", edit_movie_path(movie), class: "edit" if policy(movie).update? %>
 
-<% if policy(movie).destroy?  %>
-  <%= link_to "Delete Movie", movie_path(movie),
-      method: :delete,
-     data: { confirm: "Are you sure you want to delete this movie?"},
-      class: "delete",
-      remote: true
-     %>
-<% end %>
+<%= link_to "Delete Movie", movie_path(movie),
+    method: :delete,
+    data: { confirm: "Are you sure you want to delete this movie?"},
+    class: "delete",
+    remote: true if policy(movie).destroy?
+%>
 
 <script>
   $(document).ready(function() {
