@@ -1,6 +1,8 @@
 <h2><%= link_to movie.title, movie %></h2> 
 <p><%= movie.text %></p>
 
+<%= image_tag movie.picture.small.url, class: "img-thumbnail" if movie.picture.present? %>
+
 <div class="my-rating-<%= movie.id.to_s %>"></div>
 
 <% if policy(movie).update?  %>
