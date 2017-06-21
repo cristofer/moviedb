@@ -9,7 +9,7 @@ RSpec.feature "Users can comment on movies" do
     login_as(user)
   end
 
-  scenario "with valid attributes" do
+  scenario "with valid attributes", js: true do
     visit movie_path(movie)
     fill_in "Comment", with: "Added a comment"
 

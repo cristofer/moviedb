@@ -10,7 +10,7 @@ RSpec.describe CommentsController, type: :controller do
 
   context "with valid attribute" do
     it "can create a post" do
-      post :create, { comment: {text: "Comment"}, movie_id: movie.id }
+      post :create, { comment: {text: "Comment"}, movie_id: movie.id, :format => 'js' }
 
       movie.reload
       expect(movie.comments.count).to eq(1)
