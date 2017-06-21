@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  after_action :verify_authorized, except: [:index], unless: :devise_controller?
-#after_action :policy_scope, only: [:index]
+  after_action :verify_authorized, except: %i[index], unless: :devise_controller?
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def not_authorized
-      redirect_to root_path, alert: "You aren't allowed to do that."
-    end
+  def not_authorized
+    redirect_to root_path, alert: "You aren't allowed to do that."
+  end
 end

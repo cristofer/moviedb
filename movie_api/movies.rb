@@ -9,11 +9,11 @@ url = "http://localhost:3000/api/movies/27.json"
 #url = "http://localhost:3000/api/movies/"
 
 ###Listing the movie(s)
-response = HTTParty.get(url,
-    headers: {
-      "Authorization" => "Token token=#{token}"
-    }
-  )
+#response = HTTParty.get(url,
+#    headers: {
+#      "Authorization" => "Token token=#{token}"
+#    }
+#  )
 
 ###Deleting a movie
 #response = HTTParty.delete(url,
@@ -23,16 +23,16 @@ response = HTTParty.get(url,
 #  )
 
 #url = "http://localhost:3000/api/movies/27.json"
-#params = { movie: {title: "Title edited", text: "Text edited"} }
+params = { movie: {title: "Title edited", text: "Text edited"} }
 #params = { movie: {title: "Title edited without text"} }
 #params = { movie: {title: ""} }
 
-#response = HTTParty.patch(url,
-#    headers: {
-#      "Authorization" => "Token token=#{token}"
-#    },
-#    query: params
-#  )
+response = HTTParty.patch(url,
+    headers: {
+      "Authorization" => "Token token=#{token}"
+    },
+    query: params
+  )
 
 
 puts response.parsed_response
