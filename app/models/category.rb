@@ -9,6 +9,6 @@ class Category < ActiveRecord::Base
   end
 
   def movies_count
-    name + "(" + movies.count.to_s + ")"
+    name + '(' + movies.count.to_s + ')'
   end
 end
