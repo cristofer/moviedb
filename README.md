@@ -36,3 +36,16 @@ You can update the values into movie_api/movies.rb  in order to make a simple re
 A new version for the API, this time using Sinatra inside the Rails app.
 
 Check the values in the file: movie_api/movies-v2.rb
+
+## Somes Gems I have used in this project
+
+ * Testing with RSpec and Capybara (including JS)
+ * For testing security and good practices:
+   * [Rubycritic](https://github.com/whitesmith/rubycritic)
+   * [Rubocop](https://github.com/bbatsov/rubocop)
+   * [Brakeman](http://brakemanscanner.org)
+ * Ajax pagination: [Kaminari](https://github.com/kaminari/kaminari)
+ * Notifications: [Gritter](https://github.com/RobinBrouwer/gritter)
+ * API V2: [Sinatra](http://www.sinatrarb.com)
+ * Uplading images: [Carrierwave] (https://github.com/carrierwaveuploader/carrierwave)
+ * Charts for ratings: [Chartkick](http://chartkick.com)
