@@ -29,6 +29,7 @@ group :development do
   gem 'spring'
   gem "rubycritic", require: false
   gem 'rubocop', require: false
+  gem 'brakeman', :require => false
 end
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
