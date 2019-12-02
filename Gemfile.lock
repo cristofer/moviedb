@@ -73,7 +73,7 @@ GEM
       mime-types (>= 1.16)
     case_transform (0.2)
       activesupport
-    chartkick (2.2.4)
+    chartkick (3.3.0)
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
     codeclimate-engine-rb (0.4.0)
@@ -323,7 +323,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.14)
   carrierwave (~> 1.0)
-  chartkick (~> 2.2, >= 2.2.4)
+  chartkick (~> 3.3)
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.6, >= 1.6.1)
   devise (~> 4.3)

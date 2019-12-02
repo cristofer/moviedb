@@ -48,4 +48,4 @@ gem "sinatra"
 gem 'sinatra-strong-params', :require => 'sinatra/strong-params'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.7', '>= 4.7.1'
-gem 'chartkick', '~> 2.2', '>= 2.2.4'
+gem 'chartkick', '~> 3.3'
