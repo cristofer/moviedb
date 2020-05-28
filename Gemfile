@@ -37,7 +37,7 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'simple_form', '~> 3.5'
 gem 'devise', '~> 4.3'
 gem 'dotenv-rails'
-gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'kaminari', '~> 1.2'
 gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
 gem 'rails_12factor', group: :production
 gem "puma", group: :production
