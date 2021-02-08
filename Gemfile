@@ -46,6 +46,6 @@ gem 'active_model_serializers', '~> 0.10.6'
 gem 'pundit', '~> 1.1'
 gem "sinatra"
 gem 'sinatra-strong-params', :require => 'sinatra/strong-params'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'mini_magick', '~> 4.7', '>= 4.7.1'
 gem 'chartkick', '~> 2.2', '>= 2.2.4'
